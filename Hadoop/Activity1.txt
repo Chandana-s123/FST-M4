@@ -1,0 +1,17 @@
+#HDFS Activity
+
+$ vim txtFile.txt
+
+
+$ vim csvFile.csv 
+
+#Create Directory
+$ hdfs dfs -mkdir /user/chandana/textData
+
+#Copy to textData folder
+$ hdfs dfs -put ./txtFile.txt /user/chandana/textData
+$ hdfs dfs -put ./csvFile.csv /user/chandana/textData
+
+#stat command 
+$ hdfs dfs -stat "type:%F permissions:%a %u:%g size:%b name:%n" /user/chandana/textData/csvFile.csv
+$ hdfs dfs -stat "type:%F permissions:%a %u:%g size:%b name:%n" /user/chandana/textData/txtFile.txt

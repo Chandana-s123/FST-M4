@@ -1,0 +1,21 @@
+create database office;
+use office;
+
+DROP TABLE employee;
+
+CREATE TABLE employee (id INT, name STRING, dept STRING, yoj INT, salary INT) 
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' TBLPROPERTIES ("skip.header.line.count"="1");
+
+LOAD DATA LOCAL INPATH 'root/EmpData.csv' INTO TABLE employee;
+
+SELECT * FROM employee;
+
+SELECT COUNT(*) FROM employee;
+
+INSERT OVERWRITE DIRECTORY '/user/chandana/hiveOutput' ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT * FROM employee;
+
+INSERT OVERWRITE LOCAL DIRECTORY '/root/hiveOutput' 
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT * FROM employee;
+
