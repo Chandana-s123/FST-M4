@@ -1,0 +1,18 @@
+DROP TABLE episodes;
+
+CREATE TABLE episodes (word STRING,desc STRING)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' TBLPROPERTIES ("skip.header.line.count"="2");
+
+
+LOAD DATA LOCAL INPATH '/root/project/' INTO TABLE episodes;
+
+INSERT OVERWRITE DIRECTORY '/user/chandana/hiveOutput' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
+select word,count(1) as count from episodes
+GROUP BY word
+ORDER BY count DESC;
+
+INSERT OVERWRITE LOCAL DIRECTORY '/root/hiveOutput' 
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
+select word,count(1) as count from episodes
+GROUP BY word
+ORDER BY count DESC;
